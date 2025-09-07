@@ -17,7 +17,8 @@ interface User {
 interface Order {
   id: string;
   orderNumber: string;
-  items: number;
+  items: string[]; // Array of food item names
+  itemCount: number; // Total count for display
   price: number;
   date: string;
   time: string;
@@ -115,8 +116,9 @@ const dummyOrders: Order[] = [
   {
     id: '1',
     orderNumber: 'NSU001',
-    items: 3,
-    price: 560,
+    items: ['Paneer Tikka Masala', 'Vegetable Biryani', 'Masala Dosa'],
+    itemCount: 3,
+    price: 520,
     date: '2024-01-07',
     time: '12:30 PM',
     status: 'preparing'
@@ -124,8 +126,9 @@ const dummyOrders: Order[] = [
   {
     id: '2',
     orderNumber: 'NSU002', 
-    items: 2,
-    price: 400,
+    items: ['Chole Bhature', 'Palak Paneer with Roti'],
+    itemCount: 2,
+    price: 340,
     date: '2024-01-07',
     time: '11:45 AM',
     status: 'ready'
@@ -133,8 +136,9 @@ const dummyOrders: Order[] = [
   {
     id: '3',
     orderNumber: 'NSU003',
-    items: 1,
-    price: 180,
+    items: ['Rajma Chawal'],
+    itemCount: 1,
+    price: 140,
     date: '2024-01-06',
     time: '2:15 PM',
     status: 'delivered'
@@ -142,8 +146,9 @@ const dummyOrders: Order[] = [
   {
     id: '4',
     orderNumber: 'NSU004',
-    items: 4,
-    price: 720,
+    items: ['Paneer Tikka Masala', 'Vegetable Biryani', 'Chole Bhature', 'Masala Dosa'],
+    itemCount: 4,
+    price: 640,
     date: '2024-01-06',
     time: '1:20 PM', 
     status: 'delivered'
@@ -151,8 +156,9 @@ const dummyOrders: Order[] = [
   {
     id: '5',
     orderNumber: 'NSU005',
-    items: 2,
-    price: 340,
+    items: ['Palak Paneer with Roti', 'Rajma Chawal'],
+    itemCount: 2,
+    price: 360,
     date: '2024-01-05',
     time: '12:00 PM',
     status: 'delivered'
@@ -226,10 +232,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const placeOrder = () => {
     if (state.cart.length === 0) return;
     
+    const itemNames = state.cart.map(item => item.name);
+    
     const newOrder: Order = {
       id: Date.now().toString(),
       orderNumber: `NSU${String(state.orders.length + 1).padStart(3, '0')}`,
-      items: state.cartCount,
+      items: itemNames,
+      itemCount: state.cartCount,
       price: state.cart.reduce((total, item) => total + (item.price * item.quantity), 0),
       date: new Date().toISOString().split('T')[0],
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),

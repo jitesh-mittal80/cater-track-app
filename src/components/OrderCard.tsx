@@ -1,7 +1,8 @@
 interface Order {
   id: string;
   orderNumber: string;
-  items: number;
+  items: string[];
+  itemCount: number;
   price: number;
   date: string;
   time: string;
@@ -29,12 +30,17 @@ const OrderCard = ({ order }: OrderCardProps) => {
         <div>
           <h3 className="font-semibold text-foreground">{order.orderNumber}</h3>
           <p className="text-sm text-muted-foreground">
-            {order.items} item{order.items !== 1 ? 's' : ''}
+            {order.itemCount} item{order.itemCount !== 1 ? 's' : ''}
           </p>
         </div>
         <span className={`px-3 py-1 rounded-full text-xs font-medium capitalize ${getStatusColor(order.status)}`}>
           {order.status}
         </span>
+      </div>
+      
+      <div className="mb-3">
+        <p className="text-sm text-foreground font-medium">Items:</p>
+        <p className="text-sm text-muted-foreground">{order.items.join(', ')}</p>
       </div>
       
       <div className="flex justify-between items-center">
