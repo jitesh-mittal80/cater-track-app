@@ -27,7 +27,7 @@ const Login = () => {
       const success = login(email, password);
       if (success) {
         toast({
-          title: "Welcome to CaterTrack!",
+          title: "Welcome to NsutCater!",
           description: "You have been successfully logged in.",
         });
         navigate('/dashboard');
@@ -54,7 +54,7 @@ const Login = () => {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">
-            CaterTrack
+            NsutCater
           </h1>
           <p className="text-muted-foreground">Sign in to your account</p>
         </div>

@@ -67,7 +67,7 @@ const OrderFood = () => {
                   <ShoppingCart className="h-5 w-5 text-primary" />
                   <span className="font-medium">{state.cartCount} items</span>
                   <span className="text-muted-foreground">•</span>
-                  <span className="font-bold text-primary">${totalPrice.toFixed(2)}</span>
+                  <span className="font-bold text-primary">₹{totalPrice.toFixed(0)}</span>
                 </div>
                 <Button 
                   onClick={handlePlaceOrder}

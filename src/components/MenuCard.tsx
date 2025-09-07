@@ -36,7 +36,7 @@ const MenuCard = ({ item, onAddToCart }: MenuCardProps) => {
         </div>
         
         <div className="flex items-center justify-between">
-          <span className="text-lg font-bold text-primary">${item.price.toFixed(2)}</span>
+          <span className="text-lg font-bold text-primary">₹{item.price}</span>
           <Button 
             onClick={() => onAddToCart(item)}
             size="sm"

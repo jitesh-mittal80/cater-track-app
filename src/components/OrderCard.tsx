@@ -39,7 +39,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
       
       <div className="flex justify-between items-center">
         <div>
-          <p className="font-semibold text-lg text-foreground">${order.price.toFixed(2)}</p>
+          <p className="font-semibold text-lg text-foreground">₹{order.price.toFixed(0)}</p>
           <p className="text-sm text-muted-foreground">{order.date} at {order.time}</p>
         </div>
       </div>

@@ -1,10 +1,10 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import grilledChickenSalad from '../assets/grilled-chicken-salad.jpg';
-import beefBurger from '../assets/beef-burger.jpg';
-import margheritaPizza from '../assets/margherita-pizza.jpg';
-import caesarWrap from '../assets/caesar-wrap.jpg';
-import fishChips from '../assets/fish-chips.jpg';
-import pastaCarbonara from '../assets/pasta-carbonara.jpg';
+import paneerTikka from '../assets/paneer-tikka.jpg';
+import vegBiryani from '../assets/veg-biryani.jpg';
+import choleBhature from '../assets/chole-bhature.jpg';
+import masalaDosa from '../assets/masala-dosa.jpg';
+import palakPaneer from '../assets/palak-paneer.jpg';
+import rajmaChawal from '../assets/rajma-chawal.jpg';
 
 // User type
 interface User {
@@ -63,51 +63,51 @@ interface AppContextType {
 const dummyMenuItems: MenuItem[] = [
   {
     id: '1',
-    name: 'Grilled Chicken Salad',
-    price: 12.99,
+    name: 'Paneer Tikka Masala',
+    price: 250,
     rating: 4.5,
-    image: grilledChickenSalad,
-    category: 'Salads'
+    image: paneerTikka,
+    category: 'North Indian'
   },
   {
     id: '2', 
-    name: 'Beef Burger Deluxe',
-    price: 15.99,
+    name: 'Vegetable Biryani',
+    price: 180,
     rating: 4.7,
-    image: beefBurger,
-    category: 'Burgers'
+    image: vegBiryani,
+    category: 'Rice'
   },
   {
     id: '3',
-    name: 'Margherita Pizza',
-    price: 18.99,
+    name: 'Chole Bhature',
+    price: 120,
     rating: 4.6,
-    image: margheritaPizza,
-    category: 'Pizza'
+    image: choleBhature,
+    category: 'North Indian'
   },
   {
     id: '4',
-    name: 'Caesar Wrap',
-    price: 9.99,
+    name: 'Masala Dosa',
+    price: 90,
     rating: 4.3,
-    image: caesarWrap,
-    category: 'Wraps'
+    image: masalaDosa,
+    category: 'South Indian'
   },
   {
     id: '5',
-    name: 'Fish & Chips',
-    price: 16.99,
+    name: 'Palak Paneer with Roti',
+    price: 220,
     rating: 4.4,
-    image: fishChips,
-    category: 'Seafood'
+    image: palakPaneer,
+    category: 'North Indian'
   },
   {
     id: '6',
-    name: 'Pasta Carbonara',
-    price: 14.99,
+    name: 'Rajma Chawal',
+    price: 140,
     rating: 4.8,
-    image: pastaCarbonara,
-    category: 'Pasta'
+    image: rajmaChawal,
+    category: 'Comfort Food'
   }
 ];
 
@@ -116,7 +116,7 @@ const dummyOrders: Order[] = [
     id: '1',
     orderNumber: 'NSU001',
     items: 3,
-    price: 42.97,
+    price: 560,
     date: '2024-01-07',
     time: '12:30 PM',
     status: 'preparing'
@@ -125,7 +125,7 @@ const dummyOrders: Order[] = [
     id: '2',
     orderNumber: 'NSU002', 
     items: 2,
-    price: 28.98,
+    price: 400,
     date: '2024-01-07',
     time: '11:45 AM',
     status: 'ready'
@@ -134,7 +134,7 @@ const dummyOrders: Order[] = [
     id: '3',
     orderNumber: 'NSU003',
     items: 1,
-    price: 15.99,
+    price: 180,
     date: '2024-01-06',
     time: '2:15 PM',
     status: 'delivered'
@@ -143,7 +143,7 @@ const dummyOrders: Order[] = [
     id: '4',
     orderNumber: 'NSU004',
     items: 4,
-    price: 58.96,
+    price: 720,
     date: '2024-01-06',
     time: '1:20 PM', 
     status: 'delivered'
@@ -152,7 +152,7 @@ const dummyOrders: Order[] = [
     id: '5',
     orderNumber: 'NSU005',
     items: 2,
-    price: 31.98,
+    price: 340,
     date: '2024-01-05',
     time: '12:00 PM',
     status: 'delivered'

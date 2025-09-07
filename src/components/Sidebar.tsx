@@ -21,7 +21,7 @@ const Sidebar = () => {
     <div className="fixed left-0 top-0 h-full w-64 bg-card border-r border-border shadow-lg">
       <div className="p-6 border-b border-border">
         <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-          CaterTrack
+          NsutCater
         </h1>
       </div>
       

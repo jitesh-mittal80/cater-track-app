@@ -20,7 +20,7 @@ const Dashboard = () => {
     <div className="p-6">
       {/* Welcome Banner */}
       <div className="bg-gradient-primary rounded-lg p-6 text-white mb-6 shadow-lg">
-        <h1 className="text-2xl font-bold">Welcome to CaterTrack, {state.user?.name}!</h1>
+        <h1 className="text-2xl font-bold">Welcome to NsutCater, {state.user?.name}!</h1>
         <p className="mt-2 opacity-90">Manage your food orders and track deliveries</p>
       </div>
 
