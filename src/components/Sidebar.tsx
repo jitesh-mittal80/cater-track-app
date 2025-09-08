@@ -1,8 +1,8 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Home, ShoppingBag, History, LogOut } from 'lucide-react';
+import { Home, ShoppingBag, History, LogOut, X } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const { logout } = useApp();
   const navigate = useNavigate();
 
@@ -18,12 +18,29 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="fixed left-0 top-0 h-full w-64 bg-card border-r border-border shadow-lg">
-      <div className="p-6 border-b border-border">
-        <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-          NsutCater
-        </h1>
-      </div>
+    <>
+      {/* Mobile overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={onClose}
+        />
+      )}
+      
+      <div className={`fixed left-0 top-0 h-full w-64 bg-card border-r border-border shadow-lg z-50 transform transition-transform duration-300 lg:translate-x-0 ${
+        isOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}>
+        <div className="p-6 border-b border-border flex justify-between items-center">
+          <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            NsutCater
+          </h1>
+          <button 
+            onClick={onClose}
+            className="lg:hidden p-1 hover:bg-muted rounded-md"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
       
       <nav className="p-4">
         <ul className="space-y-2">
@@ -57,6 +74,7 @@ const Sidebar = () => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 

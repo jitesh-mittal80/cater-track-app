@@ -13,6 +13,13 @@ interface User {
   email: string;
 }
 
+// Account details type
+interface AccountDetails {
+  name: string;
+  email: string;
+  mobile: string;
+}
+
 // Order type
 interface Order {
   id: string;
@@ -43,6 +50,7 @@ interface CartItem extends MenuItem {
 // App state type
 interface AppState {
   user: User | null;
+  accountDetails: AccountDetails | null;
   orders: Order[];
   menuItems: MenuItem[];
   cart: CartItem[];
@@ -54,6 +62,8 @@ interface AppContextType {
   state: AppState;
   login: (email: string, password: string) => boolean;
   logout: () => void;
+  setAccountDetails: (details: AccountDetails) => void;
+  createAccount: () => boolean;
   addToCart: (item: MenuItem) => void;
   removeFromCart: (itemId: string) => void;
   clearCart: () => void;
@@ -172,6 +182,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [state, setState] = useState<AppState>({
     user: null,
+    accountDetails: null,
     orders: dummyOrders,
     menuItems: dummyMenuItems,
     cart: [],
@@ -193,7 +204,24 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = () => {
-    setState(prev => ({ ...prev, user: null, cart: [], cartCount: 0 }));
+    setState(prev => ({ ...prev, user: null, accountDetails: null, cart: [], cartCount: 0 }));
+  };
+
+  const setAccountDetails = (details: AccountDetails) => {
+    setState(prev => ({ ...prev, accountDetails: details }));
+  };
+
+  const createAccount = (): boolean => {
+    if (state.accountDetails) {
+      const user: User = {
+        id: Date.now().toString(),
+        name: state.accountDetails.name,
+        email: state.accountDetails.email
+      };
+      setState(prev => ({ ...prev, user }));
+      return true;
+    }
+    return false;
   };
 
   const addToCart = (item: MenuItem) => {
@@ -258,6 +286,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       state,
       login,
       logout,
+      setAccountDetails,
+      createAccount,
       addToCart,
       removeFromCart,
       clearCart,
