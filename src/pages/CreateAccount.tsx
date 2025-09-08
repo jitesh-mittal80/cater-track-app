@@ -10,6 +10,7 @@ const CreateAccount = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { setAccountDetails } = useApp();
   const { toast } = useToast();
@@ -20,7 +21,7 @@ const CreateAccount = () => {
     setIsLoading(true);
 
     try {
-      if (!name || !email || !mobile) {
+      if (!name || !email || !mobile || !password) {
         toast({
           title: "Missing Information",
           description: "Please fill in all fields.",
@@ -55,13 +56,13 @@ const CreateAccount = () => {
         <div className="bg-card border border-border rounded-lg p-6 shadow-lg">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
+              <Label htmlFor="mobile">Mobile Number</Label>
               <Input
-                id="name"
-                type="text"
-                placeholder="Enter your full name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                id="mobile"
+                type="tel"
+                placeholder="Enter your mobile number"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
                 required
               />
             </div>
@@ -79,13 +80,25 @@ const CreateAccount = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="mobile">Mobile Number</Label>
+              <Label htmlFor="name">Full Name</Label>
               <Input
-                id="mobile"
-                type="tel"
-                placeholder="Enter your mobile number"
-                value={mobile}
-                onChange={(e) => setMobile(e.target.value)}
+                id="name"
+                type="text"
+                placeholder="Enter your full name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>

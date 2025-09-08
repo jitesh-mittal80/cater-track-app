@@ -27,7 +27,7 @@ const Sidebar = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
         />
       )}
       
-      <div className={`fixed left-0 top-0 h-full w-64 bg-card border-r border-border shadow-lg z-50 transform transition-transform duration-300 lg:translate-x-0 ${
+      <div className={`fixed left-0 top-0 h-full w-64 bg-card border-r border-border shadow-lg z-50 transform transition-transform duration-300 ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
         <div className="p-6 border-b border-border flex justify-between items-center">

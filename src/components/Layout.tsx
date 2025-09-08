@@ -8,7 +8,7 @@ import Greeting from './Greeting';
 const Layout = () => {
   const { state } = useApp();
   const location = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true); // Default to open on larger screens
 
   // Redirect to login if not authenticated
   if (!state.user && location.pathname !== '/login') {
@@ -23,22 +23,26 @@ const Layout = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header with hamburger menu and greeting */}
-      <header className="fixed top-0 left-0 right-0 h-16 bg-card border-b border-border z-30 lg:left-64">
+      <header className={`fixed top-0 left-0 right-0 h-16 bg-card border-b border-border z-30 transition-all duration-300 ${
+        sidebarOpen ? 'lg:left-64' : 'lg:left-0'
+      }`}>
         <div className="flex items-center justify-between h-full px-4">
           <button
-            onClick={() => setSidebarOpen(true)}
-            className="lg:hidden p-2 hover:bg-muted rounded-md"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="p-2 hover:bg-muted rounded-md"
           >
             <Menu className="h-5 w-5" />
           </button>
-          <div className="flex-1 lg:hidden" />
+          <div className="flex-1" />
           <Greeting />
         </div>
       </header>
 
-      <div className="flex pt-16 lg:pt-0">
+      <div className="flex pt-16">
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-        <main className="flex-1 lg:ml-64 p-4 lg:p-6">
+        <main className={`flex-1 p-4 lg:p-6 transition-all duration-300 ${
+          sidebarOpen ? 'lg:ml-64' : 'lg:ml-0'
+        }`}>
           <Outlet />
         </main>
       </div>
