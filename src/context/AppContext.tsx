@@ -65,6 +65,7 @@ interface AppContextType {
   setAccountDetails: (details: AccountDetails) => void;
   createAccount: () => boolean;
   addToCart: (item: MenuItem) => void;
+  decreaseQuantity: (itemId: string) => void;
   removeFromCart: (itemId: string) => void;
   clearCart: () => void;
   placeOrder: () => void;
@@ -245,6 +246,18 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  const decreaseQuantity = (itemId: string) => {
+    setState(prev => {
+      const newCart = prev.cart.map(cartItem =>
+        cartItem.id === itemId && cartItem.quantity > 1
+          ? { ...cartItem, quantity: cartItem.quantity - 1 }
+          : cartItem
+      );
+      const cartCount = newCart.reduce((total, cartItem) => total + cartItem.quantity, 0);
+      return { ...prev, cart: newCart, cartCount };
+    });
+  };
+
   const removeFromCart = (itemId: string) => {
     setState(prev => {
       const newCart = prev.cart.filter(item => item.id !== itemId);
@@ -289,6 +302,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       setAccountDetails,
       createAccount,
       addToCart,
+      decreaseQuantity,
       removeFromCart,
       clearCart,
       placeOrder

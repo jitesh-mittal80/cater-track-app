@@ -17,7 +17,7 @@ interface MenuCardProps {
 }
 
 const MenuCard = ({ item, onAddToCart }: MenuCardProps) => {
-  const { state, removeFromCart } = useApp();
+  const { state, decreaseQuantity } = useApp();
   
   // Find if item is in cart and get its quantity
   const cartItem = state.cart.find(cartItem => cartItem.id === item.id);
@@ -25,7 +25,7 @@ const MenuCard = ({ item, onAddToCart }: MenuCardProps) => {
   const quantity = cartItem?.quantity || 0;
 
   const handleDecrease = () => {
-    removeFromCart(item.id);
+    decreaseQuantity(item.id);
   };
 
   const handleIncrease = () => {

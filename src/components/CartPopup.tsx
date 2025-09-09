@@ -6,7 +6,7 @@ import { useApp } from '../context/AppContext';
 import { useToast } from '../hooks/use-toast';
 
 const CartPopup = () => {
-  const { state, addToCart, removeFromCart, placeOrder } = useApp();
+  const { state, addToCart, decreaseQuantity, removeFromCart, placeOrder } = useApp();
   const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
   const [isOrdering, setIsOrdering] = useState(false);
@@ -16,6 +16,10 @@ const CartPopup = () => {
   };
 
   const handleQuantityDecrease = (itemId: string) => {
+    decreaseQuantity(itemId);
+  };
+
+  const handleRemoveItem = (itemId: string) => {
     removeFromCart(itemId);
   };
 
@@ -79,7 +83,7 @@ const CartPopup = () => {
           ) : (
             <div className="space-y-4">
               {state.cart.map((item) => (
-                <div key={item.id} className="flex items-center justify-between p-3 bg-card border border-border rounded-lg">
+                <div key={item.id} className="flex items-center gap-3 p-3 bg-card border border-border rounded-lg">
                   <div className="flex-1">
                     <h4 className="font-medium text-foreground">{item.name}</h4>
                     <p className="text-sm text-muted-foreground">₹{item.price} each</p>
@@ -91,6 +95,7 @@ const CartPopup = () => {
                       variant="outline"
                       onClick={() => handleQuantityDecrease(item.id)}
                       className="h-8 w-8 p-0"
+                      disabled={item.quantity <= 1}
                     >
                       <Minus className="h-3 w-3" />
                     </Button>
@@ -109,10 +114,19 @@ const CartPopup = () => {
                     </Button>
                   </div>
                   
-                  <div className="ml-4 text-right">
-                    <p className="font-bold text-primary">
+                  <div className="text-right">
+                    <p className="font-bold text-primary mb-1">
                       ₹{(item.price * item.quantity).toFixed(0)}
                     </p>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => handleRemoveItem(item.id)}
+                      className="h-6 text-xs text-destructive hover:text-destructive hover:bg-destructive/10"
+                    >
+                      <X className="h-3 w-3 mr-1" />
+                      Remove
+                    </Button>
                   </div>
                 </div>
               ))}
